@@ -13,12 +13,12 @@ public class HelloService {
     public static void main(String[] args) {
         System.out.println("Starting Hello service......");
         try {
-            HelloImpl helloImpl = new HelloImpl();
+            Hello helloImpl = new HelloImpl();
             Naming.rebind("hello", helloImpl);
         } catch (Exception e) {
             e.printStackTrace();
         } 
-        System.out.println("Hello service has started, waiting to be called......");
+        System.out.println("Hello service has been started, waiting to be called......");
     }
 
 }
