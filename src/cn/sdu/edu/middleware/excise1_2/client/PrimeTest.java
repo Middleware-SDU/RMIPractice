@@ -1,6 +1,8 @@
 package cn.sdu.edu.middleware.excise1_2.client;
 
 import java.rmi.Naming;
+import java.util.Map;
+
 import cn.sdu.edu.middleware.excise1_2.service.PrimeJudgement;
 
 /**
@@ -49,11 +51,12 @@ public class PrimeTest {
         }
         try {
             for(int i=startEven; i<=(startEven+2*count); i+=2) {
-                for(int j=2; j<=i/2; j++) {
-                    if(primeJudgement.isPrime(j) && primeJudgement.isPrime(i-j)) {
-                        System.out.println(i +" = "+ j +" + "+(i-j));
-                        break;
-                    }
+                Map<String, Integer> result = primeJudgement.resolve(i);
+                if(result != null) {
+                    System.out.println(i +" = "+ result.get("one") +" + "+ result.get("another"));
+                } else {
+                    System.err.println("Not all even which is bigger than 2 will be sumed bu two primes");
+                    return;
                 }
             }
         } catch (Exception e) {

@@ -2,6 +2,8 @@ package cn.sdu.edu.middleware.excise1_2.service;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -34,6 +36,22 @@ public class PrimeJudgementImpl extends UnicastRemoteObject implements PrimeJudg
             }
         }
         return true;
+    }
+
+    @Override
+    public Map<String, Integer> resolve(int even) throws RemoteException {
+        Map<String, Integer> result = new HashMap<>();
+        System.out.println("Resoving " + even + " ......");
+        for(int j=2; j<=even/2; j++) {
+            if(isPrime(j) && isPrime(even-j)) {
+                result.put("one", j);
+                result.put("another", even-j);
+                System.out.println("Resove " + even + " successfully!");
+                return result;
+            }
+        }
+        System.err.println("Resove " + even + " failure!");
+        return null;
     }
 
 }
